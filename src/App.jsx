@@ -5,6 +5,7 @@ import CompanySearchResults from "./components/CompanySearchResults"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import store from "./redux/store"
 import { Provider } from "react-redux"
+import Favorites from "./components/Favorites"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainSearch />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/:company" element={<CompanySearchResults />} />
         </Routes>
       </BrowserRouter>
