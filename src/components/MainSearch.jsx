@@ -2,11 +2,14 @@ import { useState } from "react"
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
 import Job from "./Job"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 const MainSearch = () => {
   const [query, setQuery] = useState("")
   const [jobs, setJobs] = useState([])
   const navigate = useNavigate()
+
+  const count = useSelector((state) => state.favorites.count)
 
   const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search="
 
@@ -35,7 +38,10 @@ const MainSearch = () => {
       <Row>
         <Col xs={10} className="mx-auto my-3">
           <div className="d-flex justify-content-end">
-            <Button onClick={() => navigate("/favorites")}> Go to Favorites</Button>
+            <Button onClick={() => navigate("/favorites")}>
+              {" "}
+              <i className="bi bi-heart"> Favorites {count}</i>
+            </Button>
           </div>
           <h1 className="display-1">Remote Jobs Search</h1>
         </Col>
