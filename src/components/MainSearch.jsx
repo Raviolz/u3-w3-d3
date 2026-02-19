@@ -9,7 +9,8 @@ const MainSearch = () => {
   const [jobs, setJobs] = useState([])
   const navigate = useNavigate()
 
-  const count = useSelector((state) => state.favorites.count)
+  const list = useSelector((state) => state.favorites.list)
+  const uniqueCount = list.filter((job, index, self) => index === self.findIndex((j) => j.company_name === job.company_name)).length
 
   const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search="
 
@@ -40,7 +41,7 @@ const MainSearch = () => {
           <div className="d-flex justify-content-end">
             <Button onClick={() => navigate("/favorites")}>
               {" "}
-              <i className="bi bi-heart"> Favorites {count}</i>
+              <i className="bi bi-heart"> Favorites {uniqueCount}</i>
             </Button>
           </div>
           <h1 className="display-1">Remote Jobs Search</h1>

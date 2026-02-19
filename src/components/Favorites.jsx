@@ -2,24 +2,38 @@ import { Container, Row, Col, ListGroup } from "react-bootstrap"
 import { useSelector } from "react-redux"
 
 const Favorites = () => {
-  const count = useSelector((state) => state.favorites.count)
+  const list = useSelector((state) => state.favorites.list)
+
+  //   const uniqueCompanies = []
+
+  // list.forEach((job) => {
+  //   const exists = uniqueCompanies.some(
+  //     (j) => j.company_name === job.company_name
+  //   )
+
+  //   if (!exists) {
+  //     uniqueCompanies.push(job)
+  //   }
+  // })
+
+  const uniqueCompanies = list.filter((job, index, self) => index === self.findIndex((j) => j.company_name === job.company_name))
+
   return (
-    <>
-      <Container>
-        <Row className="justify-content-center mt-5">
-          <Col xs={12} md={4}>
-            {" "}
-            <h1> FAVORITES: {count} </h1>
-            <ListGroup as="ul" className="mt-5">
-              <ListGroup.Item as="li">Cras justo odio</ListGroup.Item>
-              <ListGroup.Item as="li">Dapibus ac facilisis in</ListGroup.Item>
-              <ListGroup.Item as="li">Morbi leo risus</ListGroup.Item>
-              <ListGroup.Item as="li">Porta ac consectetur ac</ListGroup.Item>
-            </ListGroup>
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <Container>
+      <Row className="justify-content-center mt-5">
+        <Col xs={12} md={6}>
+          <h1>FAVORITES: {uniqueCompanies.length}</h1>
+
+          <ListGroup as="ul" className="mt-4">
+            {uniqueCompanies.map((job) => (
+              <ListGroup.Item key={job._id} as="li">
+                {job.company_name}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
