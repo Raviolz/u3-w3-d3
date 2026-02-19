@@ -1,3 +1,5 @@
+import { ADD_TO_FAVORITES } from "../actions/indexA"
+
 const initialState = {
   favorites: {
     count: 0,
@@ -7,7 +9,7 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_TO_FAVORITES":
+    case ADD_TO_FAVORITES:
       return {
         ...state,
         favorites: {
